@@ -1,0 +1,9 @@
+while read p; do
+  youtube-dl "$p" -f mp4 --output "%(title)s.%(ext)s"
+done <"download-list.txt"
+
+for i in *.mp4;
+  do name=`echo $i | cut -d'.' -f1`;
+  ffmpeg -i "$i" "songs/${name}.mp3";
+  rm "$i"
+done
